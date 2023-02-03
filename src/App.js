@@ -1,14 +1,22 @@
-import { SiTailwindcss } from "react-icons/si";
+import { Fragment } from "react";
+import Counter from "./components/Counter";
 
-const App = () => {
+import Header from "./components/Header";
+import UserProfile from "./components/UserProfile";
+import Auth from "./components/Auth";
+import { useSelector } from "react-redux";
+
+function App() {
+	const auth = useSelector((state) => state.auth.isAuthenticated);
+
 	return (
-		<main className="flex items-center justify-center h-screen">
-			<p className="p-2 text-2xl capitalize bg-red-300">
-				use this template for react practice with tailwind
-				<SiTailwindcss className="inline mx-1 text-cyan-500" />
-			</p>
-		</main>
+		<Fragment>
+			<Header />
+			{auth && <UserProfile />}
+			{!auth && <Auth />}
+			{auth && <Counter />}
+		</Fragment>
 	);
-};
+}
 
 export default App;
